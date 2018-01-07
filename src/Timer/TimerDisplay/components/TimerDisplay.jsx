@@ -1,9 +1,19 @@
 import React from 'react';
 
+const leftPad = (val) => {
+    if (val < 10) {
+        return '0' + val;
+    } else {
+        return val;
+    }
+}
+
 const TimerDisplay = (props) => (
     <div className = "row" >
         <h2 class = "text-center">
-            {props.currentTime.get('hours')}:{props.currentTime.get('minutes')}:{props.currentTime.get('seconds')}
+            {leftPad(props.currentTime.get('hours'))}
+            :{leftPad(props.currentTime.get('minutes'))}
+            :{leftPad(props.currentTime.get('seconds'))}
         </h2>
     </div>
 );
