@@ -1,0 +1,14 @@
+.app-content {
+    width: 600px;
+    padding: 50px;
+}
+
+.control-row {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 650px) {
+    .app-content {
+        width: auto;
+    }
+}
