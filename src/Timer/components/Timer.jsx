@@ -10,7 +10,7 @@ class Timer extends Component {
         super();
         this.state = {
             currentTime: moment.duration(25, 'minutes'),
-            baseTime: moment.duration*(25, 'minutes')
+            baseTime: moment.duration(25, 'minutes')
         };
     }
     

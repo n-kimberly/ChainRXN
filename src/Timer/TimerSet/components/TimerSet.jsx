@@ -1,5 +1,5 @@
 import React from 'react';
-const TimerSet = () => (
+const TimerSet = (props) => (
     <div className = "row" >
         <h2 className = "text-primary"> Set Timer</h2>
         <div className = "row control-row" >
@@ -8,7 +8,7 @@ const TimerSet = () => (
             <label htmlFor = "hours"> Hours </label>
             </div>
             <div className = "col-sm-9">  
-            <input id = "hours" className = "form-control" type = "number" />
+            <input id = "hours" className = "form-control" type = "number" defaultValue = { props.baseTime.get('hours') }/>
             </div>
         </div>
         </div>
@@ -18,7 +18,7 @@ const TimerSet = () => (
             <label htmlFor = "minutes"> Minutes </label>
             </div>
             <div className = "col-sm-9">  
-            <input id = "minutes" className = "form-control" type = "number" />
+            <input id = "minutes" className = "form-control" type = "number" defaultValue = { props.baseTime.get('minutes') } />
             </div>
         </div>
         </div>
@@ -28,7 +28,7 @@ const TimerSet = () => (
             <label htmlFor = "seconds"> Seconds </label>
             </div>
             <div className = "col-sm-9">  
-            <input id = "seconds" className = "form-control" type = "number" />
+            <input id = "seconds" className = "form-control" type = "number" defaultValue = { props.baseTime.get('seconds') } />
             </div>
         </div>
         </div>
