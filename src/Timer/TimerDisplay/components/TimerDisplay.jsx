@@ -10,7 +10,7 @@ const leftPad = (val) => {
 
 const TimerDisplay = (props) => (
     <div className = "row" >
-        <h2 class = "text-center">
+        <h2 className = "text-center">
             {leftPad(props.currentTime.get('hours'))}
             :{leftPad(props.currentTime.get('minutes'))}
             :{leftPad(props.currentTime.get('seconds'))}
