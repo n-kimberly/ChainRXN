@@ -4,13 +4,15 @@ import TimerDisplay from '../TimerDisplay/components/TimerDisplay';
 import TimerControls from '../TimerControls/components/TimerControls';
 import TimerSet from '../TimerSet/components/TimerSet';
 import moment from 'moment';
+import * as timerStates from '../timerStates';
 
 class Timer extends Component {
     constructor() {
         super();
         this.state = {
             currentTime: moment.duration(25, 'minutes'),
-            baseTime: moment.duration(25, 'minutes')
+            baseTime: moment.duration(25, 'minutes'),
+            timerState: timerStates.NOT_SET
         };
         this.setTime = this.setTime.bind(this);
     }
@@ -18,7 +20,7 @@ class Timer extends Component {
     setTime(newBaseTime) {
         this.setState({
             baseTime: newBaseTime,
-            currentTime: newBaseTime
+            currentTime: newBaseTime,
         });
     }
 
@@ -30,9 +32,13 @@ class Timer extends Component {
                 <TimerDisplay 
                     currentTime = { this.state.currentTime }/>
                 <TimerControls />
-                <TimerSet 
-                    baseTime = { this.state.baseTime }
-                    setTime = {this.setTime} />
+                {
+                    (this.state.timerState !== timerStates.RUNNING)
+                    &&
+                    (<TimerSet 
+                        baseTime = { this.state.baseTime }
+                        setTime = {this.setTime} />)
+                }
             </div>
         );
     }
