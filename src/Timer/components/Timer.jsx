@@ -12,11 +12,13 @@ class Timer extends Component {
         this.state = {
             currentTime: moment.duration(25, 'minutes'),
             baseTime: moment.duration(25, 'minutes'),
-            timerState: timerStates.RESETTED
+            timerState: timerStates.RESETTED,
+            timer: null
         };
         this.setTime = this.setTime.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
         this.startTimer = this.startTimer.bind(this);
+        this.reduceTimer = this.reduceTimer.bind(this);
         this.pauseTimer = this.pauseTimer.bind(this);
         this.completeTimer = this.completeTimer.bind(this);
     }
@@ -25,36 +27,63 @@ class Timer extends Component {
         this.setState({
             baseTime: newBaseTime,
             currentTime: newBaseTime,
+            timerState: timerStates.RESETTED,
+            timer: null
         });
     }
 
     resetTimer() {
+        console.log("stopped...");
+        if (this.state.timer) {
+            clearInterval((this.state.timer));
+        }
         this.setState({
-            timerState: timerStates.RESETTED
-        })
+            timerState: timerStates.RESETTED,
+            timer: null,
+            currentTime: moment.duration(this.state.baseTime)
+        });
     }
 
     startTimer() {
+        console.log("counting down...");
         this.setState({
-            timerState: timerStates.PLAYING
-        })
+            timerState: timerStates.PLAYING,
+            timer: setInterval(this.reduceTimer, 1000)
+        });
         this.reduceTimer();
     }
 
     reduceTimer() {
-        console.log("counting down");
+        let newTime = moment.duration(this.state.currentTime);
+        if (newTime.get('minutes') === 0 && newTime.get('seconds') < 1) {
+            this.completeTimer();
+        } else {
+            newTime.subtract(1, 'seconds');
+            this.setState({
+                currentTime: newTime
+            });
+            console.log(this.state.currentTime);
+        };
     }
 
     pauseTimer() {
+        console.log("pause now");
+        if (this.state.timer) {
+            clearInterval((this.state.timer));
+        }
         this.setState({
-            timerState: timerStates.PAUSED
-        })
+            timerState: timerStates.PAUSED,
+            timer: null
+        });
     }
 
     completeTimer() {
+        console.log("completed");
+        clearInterval((this.state.timer));
         this.setState({
-            timerState: timerStates.COMPLETED
-        })
+            timerState: timerStates.COMPLETED,
+            timer: null
+        });
     }
 
     render() 
@@ -67,7 +96,8 @@ class Timer extends Component {
                 <TimerControls 
                     pauseTimer = { this.pauseTimer }
                     startTimer = { this.startTimer }
-                    resetTimer = { this.resetTimer } 
+                    resetTimer = { this.resetTimer }
+                    setTime = { this.setTime }
                     timerStates = { timerStates }
                     timerState = { this.state.timerState } />
                 {
@@ -75,7 +105,7 @@ class Timer extends Component {
                     &&
                     (<TimerSet 
                         baseTime = { this.state.baseTime }
-                        setTime = {this.setTime} />)
+                        setTime = { this.setTime } />)
                 }
             </div>
         );

@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class TimerControls extends Component {
-    // constructor() {
-    //     super();
-    // }
+    constructor() {
+        super();
+        this.nextTimer = this.nextTimer.bind(this);
+    }
+
+    nextTimer() {
+        const nextTime = moment.duration(5, 'minutes');
+        console.log(nextTime);
+        this.props.setTime(nextTime);
+    }
 
     render()
     {
@@ -11,17 +19,20 @@ class TimerControls extends Component {
             <div className = "row">
                 <div className = "text-center">
                     {
-                        (this.props.timerState !== this.props.timerStates.PLAYING)
+                        (this.props.timerState === this.props.timerStates.COMPLETED ||
+                        this.props.timerState ===
+                        this.props.timerStates.RESETTED)
                         &&
                         (<button 
-                            className = "glyphicon glyphicon-chevron-left" />)
+                            className = "glyphicon glyphicon-chevron-left" 
+                            onClick = { this.props.resetTimer } />)
                     }
                     {
                         (this.props.timerState === this.props.timerStates.PLAYING)
                         &&
                         (<button 
-                        className = "glyphicon glyphicon-pause" 
-                        onClick = { this.props.pauseTimer } />)
+                            className = "glyphicon glyphicon-pause" 
+                            onClick = { this.props.pauseTimer } />)
                     }
                     {
                         (this.props.timerState !== this.props.timerStates.PLAYING)
@@ -31,17 +42,21 @@ class TimerControls extends Component {
                             onClick = { this.props.startTimer } />)
                     }
                     {
-                        (this.props.timerState === this.props.timerStates.PLAYING)
+                        (this.props.timerState === this.props.timerStates.PLAYING ||
+                        this.props.timerState ===
+                        this.props.timerStates.PAUSED)
                         &&
                         (<button 
-                        className = "glyphicon glyphicon-stop" 
-                        onClick = { this.props.resetTimer } />)
+                            className = "glyphicon glyphicon-stop" 
+                            onClick = { this.props.resetTimer } />)
                     }
                     {
-                        (this.props.timerState !== this.props.timerStates.PLAYING)
+                        (this.props.timerState === this.props.timerStates.COMPLETED ||
+                        this.props.timerState ===
+                        this.props.timerStates.RESETTED)
                         &&
                         (<button 
-                            className = "glyphicon glyphicon-chevron-right" />)
+                            className = "glyphicon glyphicon-chevron-right" onClick = { this.nextTimer } />)
                     }
                 </div>
             </div>

@@ -59,7 +59,6 @@ class TimerSet extends Component {
                             id = "minutes" 
                             className = "form-control" 
                             type = "number" 
-                            defaultValue = { this.props.baseTime.get('minutes') }
                             onChange = { this.handleChange } />
                         </div>
                     </div>
