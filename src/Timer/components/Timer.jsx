@@ -12,9 +12,13 @@ class Timer extends Component {
         this.state = {
             currentTime: moment.duration(25, 'minutes'),
             baseTime: moment.duration(25, 'minutes'),
-            timerState: timerStates.NOT_SET
+            timerState: timerStates.RESETTED
         };
         this.setTime = this.setTime.bind(this);
+        this.resetTimer = this.resetTimer.bind(this);
+        this.startTimer = this.startTimer.bind(this);
+        this.pauseTimer = this.pauseTimer.bind(this);
+        this.completeTimer = this.completeTimer.bind(this);
     }
     
     setTime(newBaseTime) {
@@ -24,16 +28,50 @@ class Timer extends Component {
         });
     }
 
+    resetTimer() {
+        this.setState({
+            timerState: timerStates.RESETTED
+        })
+    }
+
+    startTimer() {
+        this.setState({
+            timerState: timerStates.PLAYING
+        })
+        this.reduceTimer();
+    }
+
+    reduceTimer() {
+        console.log("counting down");
+    }
+
+    pauseTimer() {
+        this.setState({
+            timerState: timerStates.PAUSED
+        })
+    }
+
+    completeTimer() {
+        this.setState({
+            timerState: timerStates.COMPLETED
+        })
+    }
+
     render() 
     {
         return (
             <div className = "container-fluid">
                 <TimerHeader />
                 <TimerDisplay 
-                    currentTime = { this.state.currentTime }/>
-                <TimerControls />
+                    currentTime = { this.state.currentTime } />
+                <TimerControls 
+                    pauseTimer = { this.pauseTimer }
+                    startTimer = { this.startTimer }
+                    resetTimer = { this.resetTimer } 
+                    timerStates = { timerStates }
+                    timerState = { this.state.timerState } />
                 {
-                    (this.state.timerState !== timerStates.RUNNING)
+                    (this.state.timerState !== timerStates.PLAYING)
                     &&
                     (<TimerSet 
                         baseTime = { this.state.baseTime }
