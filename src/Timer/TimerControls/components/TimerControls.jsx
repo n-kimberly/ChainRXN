@@ -4,13 +4,6 @@ import moment from 'moment';
 class TimerControls extends Component {
     constructor() {
         super();
-        this.nextTimer = this.nextTimer.bind(this);
-    }
-
-    nextTimer() {
-        const nextTime = moment.duration(5, 'minutes');
-        console.log(nextTime);
-        this.props.setTime(nextTime);
     }
 
     render()
@@ -24,8 +17,7 @@ class TimerControls extends Component {
                         this.props.timerStates.RESETTED)
                         &&
                         (<button 
-                            className = "glyphicon glyphicon-chevron-left" 
-                            onClick = { this.props.resetTimer } />)
+                            className = "glyphicon glyphicon-chevron-left" />)
                     }
                     {
                         (this.props.timerState === this.props.timerStates.PLAYING)
@@ -56,7 +48,7 @@ class TimerControls extends Component {
                         this.props.timerStates.RESETTED)
                         &&
                         (<button 
-                            className = "glyphicon glyphicon-chevron-right" onClick = { this.nextTimer } />)
+                            className = "glyphicon glyphicon-chevron-right" />)
                     }
                 </div>
             </div>

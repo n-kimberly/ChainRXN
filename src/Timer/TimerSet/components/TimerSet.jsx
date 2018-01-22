@@ -33,7 +33,7 @@ class TimerSet extends Component {
     {
         return (
             <div className = "row" >
-                <h2 className = "text-primary"> Set Timer</h2>
+                {/* <h4 className = "text-primary"> Set Timer</h4> */}
                 {/* <div className = "row control-row" >
                     <div className = "form-group">
                         <div className = "col-sm-3">  
@@ -51,10 +51,10 @@ class TimerSet extends Component {
                 </div> */}
                 <div className = "row control-row" >
                     <div className = "form-group">
-                        <div className = "col-sm-3">  
-                        <label htmlFor = "minutes"> Minutes </label>
-                        </div>
-                        <div className = "col-sm-9">  
+                        <h5 className = "col-sm-4" align = "right">  
+                            <label htmlFor = "minutes"> Set Timer (min.) </label>
+                        </h5>
+                        <div className = "col-sm-4">  
                         <input 
                             id = "minutes" 
                             className = "form-control" 

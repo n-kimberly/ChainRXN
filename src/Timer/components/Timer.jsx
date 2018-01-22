@@ -90,7 +90,7 @@ class Timer extends Component {
     {
         return (
             <div className = "container-fluid">
-                <TimerHeader />
+                {/* <TimerHeader /> */}
                 <TimerDisplay 
                     currentTime = { this.state.currentTime } />
                 <TimerControls 
