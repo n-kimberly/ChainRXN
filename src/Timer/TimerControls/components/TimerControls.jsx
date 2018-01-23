@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 
 class TimerControls extends Component {
-    constructor() {
-        super();
-    }
-
     render()
     {
         return (
@@ -55,19 +50,5 @@ class TimerControls extends Component {
         );
     }
 }
-
-// const TimerControls = (props) => (
-//     <div className = "row">
-//         <div className = "text-center">
-//             <button className = "glyphicon glyphicon-chevron-left align-center"></button>
-//             <button className = "glyphicon glyphicon-pause"></button>
-//             <button 
-//                 className = "glyphicon glyphicon-play"
-//                 onClick = {this.props.startTimer} />
-//             <button className = "glyphicon glyphicon-stop"></button>
-//             <button className = "glyphicon glyphicon-chevron-right"></button>
-//         </div>
-//     </div>
-// );
 
 export default TimerControls

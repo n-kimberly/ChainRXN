@@ -1,36 +1,27 @@
 import React, { Component } from 'react';
-import TaskbarHeader from '../TaskbarHeader/components/TaskbarHeader';
 import TaskbarDisplay from '../TaskbarDisplay/components/TaskbarDisplay';
-import TaskbarControls from '../TaskbarControls/components/TaskbarControls';
-import TaskbarSet from '../TaskbarSet/components/TaskbarSet';
-import moment from 'moment';
-import * as TaskbarStates from '../TaskbarStates';
 
 class Taskbar extends Component {
-    constructor() {
-        super();
-    }
-
     render() 
     {
+        const rows = [];
+        this.props.routines.forEach(routine => {
+            rows.push(
+                <TaskbarDisplay 
+                    routine = { routine }
+                    key = {routine.timerName}
+                />
+            );
+        });
         return (
             <div className = "container-fluid">
-                {/* <TaskbarHeader /> */}
-                <TaskbarDisplay />
-                {/* <TaskbarControls 
-                    pauseTaskbar = { this.pauseTaskbar }
-                    startTaskbar = { this.startTaskbar }
-                    resetTaskbar = { this.resetTaskbar }
-                    setTime = { this.setTime }
-                    TaskbarStates = { TaskbarStates }
-                    TaskbarState = { this.state.TaskbarState } /> */}
-                {/* {
-                    (this.state.TaskbarState !== TaskbarStates.PLAYING)
-                    &&
-                    (<TaskbarSet 
-                        baseTime = { this.state.baseTime }
-                        setTime = { this.setTime } />)
-                } */}
+                <div className = "navbar navbar-default">
+                    <div className = "navbar-inner">
+                        <ul className = "nav navbar-nav">
+                            {rows}
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     }

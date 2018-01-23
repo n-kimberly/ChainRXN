@@ -6,6 +6,20 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.routines = [
+      {timerType: 'Work', isCurrent: false, timerName: 'Period 1', timerAllocation: 25},
+      {timerType: 'Break', isCurrent: true,  timerName: 'Period 2', timerAllocation: 5},
+      {timerType: 'Work', isCurrent: false, timerName: 'Period 3', timerAllocation: 25},
+      {timerType: 'Break', isCurrent: false, timerName: 'Period 4', timerAllocation: 5},
+      {timerType: 'Work', isCurrent: false, timerName: 'Period 5', timerAllocation: 25},
+      {timerType: 'Break', isCurrent: false, timerName: 'Period 6', timerAllocation: 5},
+      {timerType: 'Work', isCurrent: false, timerName: 'Period 7', timerAllocation: 25},
+      {timerType: 'Break', isCurrent: false, timerName: 'Period 8', timerAllocation: 30}
+    ];
+  }
+
   render() {
     return (
       <div> 
@@ -14,10 +28,14 @@ class App extends Component {
           <div className = "panel panel-default">
             <h2 className = "panel-heading" align="center">Timer</h2>
             <div className = "panel-body">
-              <Timer />
+              <Timer 
+                routines = { this.routines } 
+              />
             </div>
             <div className = "panel-body">
-              <Taskbar />
+              <Taskbar 
+                routines = { this.routines } 
+              />
             </div>
           </div>
           <div className = "panel panel-default">

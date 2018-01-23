@@ -17,6 +17,11 @@
     margin: 8px;
 }
 
+.routines {
+    text-align: left;
+    color: navy;
+}
+
 @media (max-width: 650px) {
     .app-content {
         width: auto;
