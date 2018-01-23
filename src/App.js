@@ -22,27 +22,28 @@ class App extends Component {
 
   render() {
     return (
-      <div> 
-        <div className = "panel panel-primary app-content center-block">
-          <h1 className = "panel-heading">Chain Rxn</h1>
-          <div className = "panel panel-default">
-            <h2 className = "panel-heading" align="center">Timer</h2>
-            <div className = "panel-body">
-              <Timer 
-                routines = { this.routines } 
-              />
-            </div>
-            <div className = "panel-body">
-              <Taskbar 
-                routines = { this.routines } 
-              />
-            </div>
+      <div className = "container">
+        <div className = "page-header"> 
+          <h1>Chain Rxn</h1>
+            <small> Control your productivity with this ReactJS application. </small>
+        </div>
+        <div className = "panel panel-default app-content center-block">
+          <h2 className = "panel-heading" align="center">Timer</h2>
+          <div className = "panel-body">
+            <Timer 
+              routines = { this.routines } 
+            />
           </div>
-          <div className = "panel panel-default">
-            <h2 className = "panel-heading" align="center">Log</h2>
-            <div className = "panel-body">
+          <div className = "panel-body">
+            <Taskbar 
+              routines = { this.routines } 
+            />
+          </div>
+        </div>
+        <div className = "panel panel-default app-content center-block">
+          <h2 className = "panel-heading" align="center">Log</h2>
+          <div className = "panel-body">
               <Tasklog />
-            </div>
           </div>
         </div>
       </div>
