@@ -8,24 +8,26 @@ class TaskbarDisplay extends Component {
       const timerType = routine.timerType;
       return (
         <div className = "routines">
-          <li className = "list-group-item">
+          <div className = "list-group-item">
           {
             (routine.isCurrent)
             && 
-            ( <span>
+            (
+              <button className = "btn btn-link" style={{color:'DarkGoldenRod'}}>
                 {timerType}: {timerName} ({timerAllocation} minutes)
-              </span>
+              </button>
             )
           }
           {
             (!routine.isCurrent)
             && 
-            ( <span style={{color: 'gray'}}>
+            (
+              <button className = "btn btn-link" style={{color:'gray'}}>
                 {timerType}: {timerName} ({timerAllocation} minutes)
-              </span>
+              </button>
             )
           }
-          </li>
+          </div>
         </div>
       );
     }

@@ -24,7 +24,7 @@ class TasklogDisplay extends Component {
                     (!this.props.isCompleted)
                     && 
                     (
-                    <span> 
+                    <span style={{color:'DarkGoldenRod'}}> 
                         <span className = "check-margin10">
                             { this.props.description }
                         </span>
