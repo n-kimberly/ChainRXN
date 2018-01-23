@@ -8,7 +8,24 @@ class TaskbarDisplay extends Component {
       const timerType = routine.timerType;
       return (
         <div className = "routines">
-          <li>{timerType}: {timerName} ({timerAllocation} minutes)</li>
+          <li className = "list-group-item">
+          {
+            (routine.isCurrent)
+            && 
+            ( <span>
+                {timerType}: {timerName} ({timerAllocation} minutes)
+              </span>
+            )
+          }
+          {
+            (!routine.isCurrent)
+            && 
+            ( <span style={{color: 'gray'}}>
+                {timerType}: {timerName} ({timerAllocation} minutes)
+              </span>
+            )
+          }
+          </li>
         </div>
       );
     }

@@ -15,13 +15,9 @@ class Taskbar extends Component {
         });
         return (
             <div className = "container-fluid">
-                <div className = "navbar navbar-default">
-                    <div className = "navbar-inner">
-                        <ul className = "nav navbar-nav">
-                            {rows}
-                        </ul>
-                    </div>
-                </div>
+                <ul className="list-group">
+                    {rows}
+                </ul>
             </div>
         );
     }

@@ -4,14 +4,39 @@ import React, {Component} from 'react';
 class TasklogDisplay extends Component {
     render() {
         return (
-            <li>
+            <div className = "list-group-item">
                 <input 
                     type="checkbox" 
                     checked={ this.props.isCompleted } 
                     onChange={ this.props.toggleComplete } />
-                <span>{ this.props.description }</span>
-                <button onClick={ this.props.delete }>X</button>
-            </li>
+                {
+                    (this.props.isCompleted)
+                    && 
+                    (
+                    <span style={{color:'gray'}}>
+                        <span className = "check-margin10">
+                            { this.props.description }
+                        </span>
+                    </span>
+                    )
+                }
+                {
+                    (!this.props.isCompleted)
+                    && 
+                    (
+                    <span> 
+                        <span className = "check-margin10">
+                            { this.props.description }
+                        </span>
+                    </span>
+                    )
+                }
+                <div className = "pull-right" style = {{color:'black'}}>
+                    <button 
+                        onClick={ this.props.delete } 
+                        className="glyphicon glyphicon-remove" />
+                </div>
+            </div>
         );
     }
 }

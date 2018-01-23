@@ -55,8 +55,8 @@ class Tasklog extends Component {
     
       render() {
         return (
-          <div className="App">
-            <ul>
+          <div className="container-fluid">
+            <ul className = "list-group">
               {
                 this.state.todos.map( 
                   (todo, index) => 

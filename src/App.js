@@ -9,8 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.routines = [
-      {timerType: 'Work', isCurrent: false, timerName: 'Period 1', timerAllocation: 25},
-      {timerType: 'Break', isCurrent: true,  timerName: 'Period 2', timerAllocation: 5},
+      {timerType: 'Work', isCurrent: true, timerName: 'Period 1', timerAllocation: 25},
+      {timerType: 'Break', isCurrent: false,  timerName: 'Period 2', timerAllocation: 5},
       {timerType: 'Work', isCurrent: false, timerName: 'Period 3', timerAllocation: 25},
       {timerType: 'Break', isCurrent: false, timerName: 'Period 4', timerAllocation: 5},
       {timerType: 'Work', isCurrent: false, timerName: 'Period 5', timerAllocation: 25},
