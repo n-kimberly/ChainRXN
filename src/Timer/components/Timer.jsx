@@ -6,10 +6,10 @@ import moment from 'moment';
 import * as timerStates from '../timerStates';
 
 class Timer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            currentTime: moment.duration(25, 'minutes'),
+            currentTime: moment.duration(props.currentTimer.timerAllocation, 'minutes'),
             baseTime: moment.duration(25, 'minutes'),
             timerState: timerStates.RESETTED,
             timer: null

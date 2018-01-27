@@ -4,12 +4,14 @@ import TaskbarDisplay from '../TaskbarDisplay/components/TaskbarDisplay';
 class Taskbar extends Component {
     render() 
     {
+        const currentTimer = this.props.currentTimer;
         const rows = [];
         this.props.routines.forEach(routine => {
             rows.push(
                 <TaskbarDisplay 
                     routine = { routine }
-                    key = {routine.timerName}
+                    key = { routine.ID }
+                    currentTimer = { currentTimer }
                 />
             );
         });

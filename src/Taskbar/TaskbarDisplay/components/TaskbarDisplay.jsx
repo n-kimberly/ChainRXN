@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 
 class TaskbarDisplay extends Component {
+
     render() {
+      
+      const currentTimer = this.props.currentTimer;
+      const currentTimerID = currentTimer.ID;
+
       const routine = this.props.routine;
-      const timerName = routine.timerName;
+      const ID = routine.ID;
+
       const timerAllocation = routine.timerAllocation;
       const timerType = routine.timerType;
+
       return (
         <div className = "routines">
           <div className = "list-group-item">
           {
-            (routine.isCurrent)
+            (ID === currentTimerID)
             && 
             (
               <button className = "btn btn-link" style={{color:'DarkGoldenRod'}}>
-                {timerType}: {timerName} ({timerAllocation} minutes)
+                Period {ID}: {timerType} for {timerAllocation} minutes
               </button>
             )
           }
           {
-            (!routine.isCurrent)
+            (ID !== currentTimerID )
             && 
             (
               <button className = "btn btn-link" style={{color:'gray'}}>
-                {timerType}: {timerName} ({timerAllocation} minutes)
+                Period {ID}: {timerType} for {timerAllocation} minutes
               </button>
             )
           }
