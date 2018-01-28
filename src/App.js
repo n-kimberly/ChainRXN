@@ -47,7 +47,9 @@ class App extends Component {
         <div className = "panel panel-default app-content center-block">
           <h2 className = "panel-heading" align="center">Log</h2>
           <div className = "panel-body">
-              <Tasklog />
+            <Tasklog 
+              currentTimer = { this.state.currentTimer }
+            />
           </div>
         </div>
       </div>
