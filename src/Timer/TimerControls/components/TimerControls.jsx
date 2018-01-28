@@ -12,7 +12,8 @@ class TimerControls extends Component {
                         this.props.timerStates.RESETTED)
                         &&
                         (<button 
-                            className = "glyphicon glyphicon-chevron-left" />)
+                            className = "glyphicon glyphicon-chevron-left"
+                            onClick = { this.props.prevTimer } />)
                     }
                     {
                         (this.props.timerState === this.props.timerStates.PLAYING)
@@ -43,7 +44,8 @@ class TimerControls extends Component {
                         this.props.timerStates.RESETTED)
                         &&
                         (<button 
-                            className = "glyphicon glyphicon-chevron-right" />)
+                            className = "glyphicon glyphicon-chevron-right"
+                            onClick = { this.props.nextTimer } />)
                     }
                 </div>
             </div>
