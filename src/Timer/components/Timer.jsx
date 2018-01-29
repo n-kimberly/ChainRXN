@@ -13,21 +13,13 @@ class Timer extends Component {
                 <TimerDisplay 
                     currentTime = { this.props.currentTime } />
                 <TimerControls 
-                    routines = { this.props.routines }
-                    currentTimer = { this.props.currentTimer }
-                    baseTime = { this.props.baseTime }
-                    currentTime = { this.props.currentTime }
                     timerStates = { this.props.timerStates }
                     timerState = { this.props.timerState }
-                    timer = { this.props.timer }
                     nextTimer = { this.props.nextTimer }
                     prevTimer = { this.props.prevTimer }
-                    setTime = { this.props.setTime }
                     resetTimer = { this.props.resetTimer }
                     startTimer = { this.props.startTimer }
-                    reduceTimer = { this.props.reduceTimer }
-                    pauseTimer = { this.props.pauseTimer }
-                    completeTimer = { this.props.completeTimer } />
+                    pauseTimer = { this.props.pauseTimer } />
                 {
                     (this.props.timerState !== timerStates.PLAYING)
                     &&

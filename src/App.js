@@ -147,53 +147,62 @@ class App extends Component {
           <h1>Chain Rxn</h1>
             <small> Control your productivity with this ReactJS application. </small>
         </div>
-        <div className = "panel panel-default app-content center-block">
-          <h2 className = "panel-heading" align="center">
-            Timer
-            <div className = "panel-title" align="right">
-              <small><em>Control, modify, and index through timers.</em></small>
+        <div class = "col-md-12">
+          <div className = "panel panel-default app-content center-block">
+            <h2 className = "panel-heading" align="center">
+              Timer
+              <div className = "panel-title" align="right">
+                <small><em>Control, modify, and index through timers.</em></small>
+              </div>
+            </h2>
+            <div className = "panel-body">
+              <Timer 
+                baseTime = { this.state.baseTime }
+                currentTime = { this.state.currentTime }
+                timerStates = { timerStates }
+                timerState = { this.state.timerState }
+                nextTimer = { this.nextTimer }
+                prevTimer = { this.prevTimer }
+                setTime = { this.setTime }
+                resetTimer = { this.resetTimer }
+                startTimer = { this.startTimer }
+                pauseTimer = { this.pauseTimer }
+              />
             </div>
-          </h2>
-          <div className = "panel-body">
-            <Timer 
-              routines = { this.routines }
-              currentTimer = { this.state.currentTimer }
-              baseTime = { this.state.baseTime }
-              currentTime = { this.state.currentTime }
-              timerStates = { timerStates }
-              timerState = { this.state.timerState }
-              timer = { this.state.timer }
-              nextTimer = { this.nextTimer }
-              prevTimer = { this.prevTimer }
-              setTime = { this.setTime }
-              resetTimer = { this.resetTimer }
-              startTimer = { this.startTimer }
-              reduceTimer = { this.reduceTimer }
-              pauseTimer = { this.pauseTimer }
-              completeTimer = { this.completeTimer }
-            />
-          </div>
-          <div className = "panel-body">
-            <Taskbar 
-              routines = { this.routines } 
-              currentTimer = { this.state.currentTimer }
-            />
           </div>
         </div>
-        <div className = "panel panel-default app-content center-block">
-          <h2 className = "panel-heading" align="center">
-            Log
-            <div className = "panel-title" align="right">
-              <small><em>Manage task history and goals.</em></small>
+        <div class = "col-md-6">
+          <div className = "panel panel-default app-content center-block">
+            <h2 className = "panel-heading" align="center">
+              Sequence
+              <div className = "panel-title" align="right">
+                <small><em>Ability to edit sequence coming soon.</em></small>
+              </div>
+            </h2>
+            <div className = "panel-body">
+              <Taskbar 
+                routines = { this.routines } 
+                currentTimer = { this.state.currentTimer }
+              />
             </div>
-          </h2>  
-          <div className = "panel-body">
-          
-            <Tasklog 
-              i = { this.i }
-              routines = { this.routines } 
-              currentTimer = { this.state.currentTimer }
-            />
+          </div>
+        </div>
+        <div class = "col-md-6">
+          <div className = "panel panel-default app-content center-block">
+            <h2 className = "panel-heading" align="center">
+              Log
+              <div className = "panel-title" align="right">
+                <small><em>Manage task history and goals.</em></small>
+              </div>
+            </h2>  
+            <div className = "panel-body">
+            
+              <Tasklog 
+                i = { this.i }
+                routines = { this.routines } 
+                currentTimer = { this.state.currentTimer }
+              />
+            </div>
           </div>
         </div>
       </div>
