@@ -20,7 +20,7 @@ class TaskbarDisplay extends Component {
             (ID === currentTimerID)
             && 
             (
-              <button className = "btn btn-link" style={{color:'DarkGoldenRod'}}>
+              <p style={{color:'DarkGoldenRod'}}>
                 {
                   (timerType === 'Work')
                   &&
@@ -31,14 +31,14 @@ class TaskbarDisplay extends Component {
                   &&
                   <em>P{ID}: {timerType} for {timerAllocation} minutes</em>
                 }
-              </button>
+              </p>
             )
           }
           {
             (ID !== currentTimerID )
             && 
             (
-              <button className = "btn btn-link" style={{color:'gray'}}>
+              <p style={{color:'gray'}}>
                 {
                   (timerType === 'Work')
                   &&
@@ -49,7 +49,7 @@ class TaskbarDisplay extends Component {
                   &&
                   <em>P{ID}: {timerType} for {timerAllocation} minutes</em>
                 }
-              </button>
+              </p>
             )
           }
           </div>
