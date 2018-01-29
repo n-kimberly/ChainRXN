@@ -158,6 +158,7 @@ class App extends Component {
             <div className = "panel-body">
               <Timer 
                 baseTime = { this.state.baseTime }
+                currentTimer = { this.state.currentTimer }
                 currentTime = { this.state.currentTime }
                 timerStates = { timerStates }
                 timerState = { this.state.timerState }

@@ -54,18 +54,33 @@ class TimerSet extends Component {
                     </div>
                 </div> */}
                 <div className = "row control-row" >
-                    <div className = "form-group">
-                        <h5 className = "col-sm-4" align = "right">  
-                            <label htmlFor = "minutes"> Modify Timer (min.) </label>
-                        </h5>
-                        <div className = "col-sm-4">  
-                        <input 
-                            id = "minutes" 
-                            className = "form-control" 
-                            type = "number" 
-                            onChange = { this.handleChange } />
+                    {
+                        (this.props.timerState !== this.props.timerStates.PLAYING)
+                        &&
+                        (
+                        <div className = "form-group">
+                            <h5 className = "col-sm-4" align = "right">  
+                                <label htmlFor = "minutes"> Modify Timer (min.) </label>
+                            </h5>
+                            <div className = "col-sm-4">  
+                            <input 
+                                id = "minutes" 
+                                className = "form-control" 
+                                type = "number" 
+                                onChange = { this.handleChange } />
+                            </div>
                         </div>
-                    </div>
+                        )
+                    }
+                    {
+                        (this.props.timerState === this.props.timerStates.PLAYING)
+                        &&
+                        (
+                        <h6 align="center">
+                            Currently playing: { this.props.currentTimer.timerType } for { this.props.currentTimer.timerAllocation } minutes 
+                        </h6>
+                        )
+                    }
                 </div>
                 {/* <div className = "row control-row" >
                     <div className = "form-group">
