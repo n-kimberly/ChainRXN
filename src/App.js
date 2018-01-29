@@ -16,13 +16,13 @@ class App extends Component {
     
     this.routines = [
       {ID: 1, timerType: 'Work', timerAllocation: 25},
-      {ID: 2, timerType: 'Break', timerAllocation: 5},
+      {ID: 2, timerType: 'Play', timerAllocation: 5},
       {ID: 3, timerType: 'Work', timerAllocation: 25},
-      {ID: 4, timerType: 'Break', timerAllocation: 5},
+      {ID: 4, timerType: 'Play', timerAllocation: 5},
       {ID: 5, timerType: 'Work', timerAllocation: 25},
-      {ID: 6, timerType: 'Break', timerAllocation: 5},
+      {ID: 6, timerType: 'Play', timerAllocation: 5},
       {ID: 7, timerType: 'Work', timerAllocation: 25},
-      {ID: 8, timerType: 'Break', timerAllocation: 30}
+      {ID: 8, timerType: 'Play', timerAllocation: 30}
     ];
     
     this.state = {
@@ -148,7 +148,12 @@ class App extends Component {
             <small> Control your productivity with this ReactJS application. </small>
         </div>
         <div className = "panel panel-default app-content center-block">
-          <h2 className = "panel-heading" align="center">Timer</h2>
+          <h2 className = "panel-heading" align="center">
+            Timer
+            <div className = "panel-title" align="right">
+              <small><em>Control, modify, and index through timers.</em></small>
+            </div>
+          </h2>
           <div className = "panel-body">
             <Timer 
               routines = { this.routines }
@@ -176,9 +181,17 @@ class App extends Component {
           </div>
         </div>
         <div className = "panel panel-default app-content center-block">
-          <h2 className = "panel-heading" align="center">Log</h2>
+          <h2 className = "panel-heading" align="center">
+            Log
+            <div className = "panel-title" align="right">
+              <small><em>Manage task history and goals.</em></small>
+            </div>
+          </h2>  
           <div className = "panel-body">
+          
             <Tasklog 
+              i = { this.i }
+              routines = { this.routines } 
               currentTimer = { this.state.currentTimer }
             />
           </div>

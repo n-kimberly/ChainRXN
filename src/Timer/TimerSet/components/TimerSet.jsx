@@ -14,6 +14,10 @@ class TimerSet extends Component {
         //         .add(parseInt(ev.target.value, 10), 'hours');
         // }
         if (ev.target.id === 'minutes') {
+            console.log(ev.target.value);
+            if (ev.target.value < 0 ) {
+                ev.target.value = 0;
+            }
             newBaseTime
                 .subtract(newBaseTime.get('hours'), 'hours')
                 .subtract(newBaseTime.get('minutes'), 'minutes')
@@ -52,7 +56,7 @@ class TimerSet extends Component {
                 <div className = "row control-row" >
                     <div className = "form-group">
                         <h5 className = "col-sm-4" align = "right">  
-                            <label htmlFor = "minutes"> Set Timer (min.) </label>
+                            <label htmlFor = "minutes"> Modify Timer (min.) </label>
                         </h5>
                         <div className = "col-sm-4">  
                         <input 

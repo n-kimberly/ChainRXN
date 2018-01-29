@@ -21,7 +21,16 @@ class TaskbarDisplay extends Component {
             && 
             (
               <button className = "btn btn-link" style={{color:'DarkGoldenRod'}}>
-                Period {ID}: {timerType} for {timerAllocation} minutes
+                {
+                  (timerType === 'Work')
+                  &&
+                  <strong>P{ID}: {timerType} for {timerAllocation} minutes</strong>
+                }
+                {
+                  (timerType === 'Play')
+                  &&
+                  <em>P{ID}: {timerType} for {timerAllocation} minutes</em>
+                }
               </button>
             )
           }
@@ -30,7 +39,16 @@ class TaskbarDisplay extends Component {
             && 
             (
               <button className = "btn btn-link" style={{color:'gray'}}>
-                Period {ID}: {timerType} for {timerAllocation} minutes
+                {
+                  (timerType === 'Work')
+                  &&
+                  <strong>P{ID}: {timerType} for {timerAllocation} minutes</strong>
+                }
+                {
+                  (timerType === 'Play')
+                  &&
+                  <em>P{ID}: {timerType} for {timerAllocation} minutes</em>
+                }
               </button>
             )
           }

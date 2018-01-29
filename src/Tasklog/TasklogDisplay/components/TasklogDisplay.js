@@ -15,7 +15,20 @@ class TasklogDisplay extends Component {
                     (
                     <span style={{color:'gray'}}>
                         <span className = "check-margin10">
-                            { this.props.description }
+                        {
+                            (this.props.routines[this.props.ID-1].timerType === 'Work')
+                            &&
+                            (
+                                <strong>P{ this.props.ID }, Done: { this.props.description }</strong>
+                            )
+                        }
+                        {
+                            (this.props.routines[this.props.ID-1].timerType === 'Play')
+                            &&
+                            (
+                                <em>P{ this.props.ID }, Done: { this.props.description }</em>
+                            )
+                        }
                         </span>
                     </span>
                     )
@@ -26,7 +39,20 @@ class TasklogDisplay extends Component {
                     (
                     <span style={{color:'DarkGoldenRod'}}> 
                         <span className = "check-margin10">
-                            { this.props.description }
+                        {
+                            (this.props.routines[this.props.ID-1].timerType === 'Work')
+                            &&
+                            (
+                                <strong>P{ this.props.ID }, Goal: { this.props.description }</strong>
+                            )
+                        }
+                        {
+                            (this.props.routines[this.props.ID-1].timerType === 'Play')
+                            &&
+                            (
+                                <em>P{ this.props.ID }, Goal: { this.props.description }</em>
+                            )
+                        }
                         </span>
                     </span>
                     )
