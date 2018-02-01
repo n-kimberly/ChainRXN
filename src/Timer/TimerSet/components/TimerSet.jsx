@@ -73,12 +73,41 @@ class TimerSet extends Component {
                         )
                     }
                     {
-                        (this.props.timerState === this.props.timerStates.PLAYING)
+                        (this.props.timerState === 
+                            this.props.timerStates.RESETTED)
                         &&
                         (
-                        <h6 align="center">
-                            Currently playing: { this.props.currentTimer.timerType } for { this.props.currentTimer.timerAllocation } minutes 
+                        <h6 align="center" style={{color:'DarkGoldenRod'}}>
+                            {
+                                (this.props.currentTimer.timerType === 'Work')
+                                &&
+                                <strong>{ this.props.currentTimer.timerType } for { this.props.currentTimer.timerAllocation } minutes </strong>
+                            }
+                            {
+                                (this.props.currentTimer.timerType === 'Play')
+                                &&
+                                <em>{ this.props.currentTimer.timerType } for { this.props.currentTimer.timerAllocation } minutes </em>
+                            }
                         </h6>
+                        )
+                    }
+                    {
+                        (this.props.timerState === 
+                            this.props.timerStates.PLAYING)
+                        &&
+                        (
+                            <h6 align="center" style={{color:'DarkGoldenRod'}}>
+                                {
+                                    (this.props.currentTimer.timerType === 'Work')
+                                    &&
+                                    <strong> Currently playing: { this.props.currentTimer.timerType } for { this.props.currentTimer.timerAllocation } minutes </strong>
+                                }
+                                {
+                                    (this.props.currentTimer.timerType === 'Play')
+                                    &&
+                                    <em> Currently playing: { this.props.currentTimer.timerType } for { this.props.currentTimer.timerAllocation } minutes </em>
+                                }
+                            </h6>
                         )
                     }
                 </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sound from 'react-sound';
 import Timer from './Timer/components/Timer';
 import * as timerStates from './Timer/timerStates';
 import moment from 'moment';
@@ -29,6 +30,7 @@ class App extends Component {
       currentTimer: this.routines[this.i],
       baseTime: moment.duration(this.routines[this.i].timerAllocation, 'minutes'),
       currentTime: moment.duration(this.routines[this.i].timerAllocation, 'minutes'),
+      playerState: Sound.status.STOPPED,
       timerState: timerStates.RESETTED,
       timer: null
     };
@@ -53,6 +55,7 @@ class App extends Component {
     console.log(this.i);
     this.setState({
       currentTimer: this.routines[this.i],
+      playerState: Sound.status.STOPPED,
       baseTime: moment.duration(this.routines[this.i].timerAllocation, 'minutes'),
       currentTime: moment.duration(this.routines[this.i].timerAllocation, 'minutes'),
       timerState: timerStates.RESETTED,
@@ -69,6 +72,7 @@ class App extends Component {
     console.log(this.i);
     this.setState({
       currentTimer: this.routines[this.i],
+      playerState: Sound.status.STOPPED,
       baseTime: moment.duration(this.routines[this.i].timerAllocation, 'minutes'),
       currentTime: moment.duration(this.routines[this.i].timerAllocation, 'minutes'),
       timerState: timerStates.RESETTED,
@@ -78,30 +82,33 @@ class App extends Component {
    
   setTime(newBaseTime) {
     this.setState({
-        baseTime: newBaseTime,
-        currentTime: newBaseTime,
-        timerState: timerStates.RESETTED,
-        timer: null
+      baseTime: newBaseTime,
+      currentTime: newBaseTime,
+      playerState: Sound.status.STOPPED,
+      timerState: timerStates.RESETTED,
+      timer: null
     });
   }
 
   resetTimer() {
     console.log("stopped...");
     if (this.state.timer) {
-        clearInterval((this.state.timer));
+      clearInterval((this.state.timer));
     }
     this.setState({
-        timerState: timerStates.RESETTED,
-        timer: null,
-        currentTime: moment.duration(this.state.baseTime, 'minutes')
+      playerState: Sound.status.STOPPED,
+      timerState: timerStates.RESETTED,
+      timer: null,
+      currentTime: moment.duration(this.state.baseTime, 'minutes')
     });
   }
 
   startTimer() {
     console.log("counting down...");
     this.setState({
-        timerState: timerStates.PLAYING,
-        timer: setInterval(this.reduceTimer, 1000)
+      playerState: Sound.status.STOPPED,
+      timerState: timerStates.PLAYING,
+      timer: setInterval(this.reduceTimer, 1000)
     });
     this.reduceTimer();
   }
@@ -109,24 +116,25 @@ class App extends Component {
   reduceTimer() {
     let newTime = moment.duration(this.state.currentTime);
     if (newTime.get('minutes') === 0 && newTime.get('seconds') < 1) {
-        this.completeTimer();
+      this.completeTimer();
     } else {
-        newTime.subtract(1, 'seconds');
-        this.setState({
-            currentTime: newTime
-        });
-        console.log(this.state.currentTime);
+      newTime.subtract(1, 'seconds');
+      this.setState({
+          currentTime: newTime
+      });
+      console.log(this.state.currentTime);
     };
   }
 
   pauseTimer() {
     console.log("pause now");
     if (this.state.timer) {
-        clearInterval((this.state.timer));
+      clearInterval((this.state.timer));
     }
     this.setState({
-        timerState: timerStates.PAUSED,
-        timer: null
+      playerState: Sound.status.STOPPED,
+      timerState: timerStates.PAUSED,
+      timer: null
     });
   }
 
@@ -134,8 +142,9 @@ class App extends Component {
     console.log("completed");
     clearInterval((this.state.timer));
     this.setState({
-        timerState: timerStates.COMPLETED,
-        timer: null
+      playerState: Sound.status.PLAYING,
+      timerState: timerStates.COMPLETED,
+      timer: null
     });
   }
 
@@ -147,7 +156,7 @@ class App extends Component {
           <h1>Chain Rxn</h1>
             <small> Control your productivity with this ReactJS application. </small>
         </div>
-        <div class = "col-md-12">
+        <div className = "col-md-12">
           <div className = "panel panel-default app-content center-block">
             <h2 className = "panel-heading" align="center">
               Timer
@@ -169,10 +178,15 @@ class App extends Component {
                 startTimer = { this.startTimer }
                 pauseTimer = { this.pauseTimer }
               />
+              <Sound
+                url ="chirp.mp3"
+                playStatus = { this.state.playerState }
+                onFinishedPlaying = { this.resetTimer }
+              />
             </div>
           </div>
         </div>
-        <div class = "col-md-6">
+        <div className = "col-md-6">
           <div className = "panel panel-default app-content center-block">
             <h2 className = "panel-heading" align="center">
               Sequence
@@ -188,7 +202,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div class = "col-md-6">
+        <div className = "col-md-6">
           <div className = "panel panel-default app-content center-block">
             <h2 className = "panel-heading" align="center">
               Log
