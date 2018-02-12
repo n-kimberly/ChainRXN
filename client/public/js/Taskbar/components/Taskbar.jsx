@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TaskbarDisplay from '../TaskbarDisplay/components/TaskbarDisplay';
+import TaskbarDisplay from '../TaskbarDisplay/components/TaskbarDisplay.jsx';
 
 class Taskbar extends Component {
     render() 

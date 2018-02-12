@@ -1,6 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+
+  /*   
 .app-content {
-    /* width: 600px; */
-    /* padding: 50px; */
+    width: 600px;
+    padding: 50px;
 }
 
 .navbar.center .navbar-inner {
@@ -29,4 +36,4 @@
     .app-content {
         width: auto;
     }
-}
+} */

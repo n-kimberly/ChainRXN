@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import TimerDisplay from '../TimerDisplay/components/TimerDisplay';
-import TimerControls from '../TimerControls/components/TimerControls';
-import TimerSet from '../TimerSet/components/TimerSet';
-
+import TimerDisplay from '../TimerDisplay/components/TimerDisplay.jsx';
+import TimerControls from '../TimerControls/components/TimerControls.jsx';
+import TimerSet from '../TimerSet/components/TimerSet.jsx';
 
 class Timer extends Component {
     render() 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TasklogDisplay from '../TasklogDisplay/components/TasklogDisplay';
+import TasklogDisplay from '../TasklogDisplay/components/TasklogDisplay.jsx';
 
 class Tasklog extends Component {
     constructor() {

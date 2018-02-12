@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Sound from 'react-sound';
-import Timer from './Timer/components/Timer';
+import Timer from './Timer/components/Timer.jsx';
 import * as timerStates from './Timer/timerStates';
 import moment from 'moment';
-import Taskbar from './Taskbar/components/Taskbar';
-import Tasklog from './Tasklog/components/Tasklog';
-import './App.css';
+import Taskbar from './Taskbar/components/Taskbar.jsx';
+import Tasklog from './Tasklog/components/Tasklog.jsx';
 
 class App extends Component {
 
