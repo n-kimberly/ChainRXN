@@ -1,100 +1,72 @@
-'use strict';
+import express from 'express';
+import mongoose from 'mongoose';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+var app = express();
 
-var _express = require('express');
+mongoose.connect('mongodb://localhost/tasks');
 
-var _express2 = _interopRequireDefault(_express);
-
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// importing depencies
-var app = (0, _express2.default)();
-
-// connecting our mongoDB database
-_mongoose2.default.connect('mongodb://localhost/todos');
-
-// mongoDB schema
-var todoModel = _mongoose2.default.model('todo', {
-    description: String,
+let taskModel = mongoose.model('task', {
+    task: String,
+    date: {
+        type: Date,
+        default: Date.now
+    },
     isCompleted: {
         type: Boolean,
         default: false
     },
-    ID: Number
-});
+    ID: {
+        type: Number,
+        default: 2
+    }
+})
 
-// utility function to print errors
-var logError = function logError(error) {
-    if (error) throw error;
-};
+var logError = (error) => {
+    if (error)
+        throw error;
+}
 
-// main server function which gets call once the app starts 
-// on our index.js file
-var server = function server() {
+var server = () => {
+    app.use(express.static('client/public'))
 
-    // serving html/js files through the server
-    app.use(_express2.default.static('client/public'));
+    app.get('/get/all', (request, response) => {
 
-    // routes that gets all todos in a list 
-    // empty is return if nothing is found
-    app.get('/get/all', function (request, response) {
-        todoModel.find(function (error, todos) {
+        taskModel.find((error, tasks) => {
             logError(error);
-            response.send(todos);
-        });
-    });
+            response.send(tasks);
+        })
+        console.log('retrieved');
+    })
 
-    // saves a todo
-    // :todo is a paramater passed in the url
-    app.get('/save/:description/:ID', function (request, response) {
-        var todo = request.params.todo;
+    app.get('/save/:task/:ID', (request, response) => {
+        let {task, ID} = request.params
 
-
-        new todoModel({ todo: todo }).save(function (error, savedTodo) {
+        new taskModel({task, ID}).save((error, savedTask) => {
             logError(error);
-            response.send(savedTodo);
-        });
-    });
+            response.send(savedTask);
+        })
+    })
 
-    // removes a specific todo
-    // :date is a parameter passsed in the url
-    // using date to find a todo since it's a unique timestamp
-    app.get('/remove/:description/:ID', function (request, response) {
-        var date = request.params.date;
-
-
-        todoModel.remove({ date: date }, function (error, deletedTodo) {
+    app.get('/update/:date/:isCompleted/:task', (request, response) => {
+        let {date, isCompleted, task} = request.params
+        taskModel.findOneAndUpdate({date}, {isCompleted, task}, {new: true}, (error, updatedTask) => {
             logError(error);
-            response.send(deletedTodo);
-        });
-    });
+            response.send(updatedTask);
+        })
+    })
 
-    // finds a specific todo 
-    // updates it a new todo text and completed value  
-    app.get('/update/:description/:isCompleted/:ID', function (request, response) {
-        var _request$params = request.params,
-            date = _request$params.date,
-            completed = _request$params.completed,
-            todo = _request$params.todo;
+    app.get('/remove/:date', (request, response)=>{
+        let {date} = request.params
 
-        todoModel.findOneAndUpdate({ date: date }, { completed: completed, todo: todo }, { new: true }, function (error, updatedTodo) {
+        taskModel.remove({date}, (error, deletedTask) => {
             logError(error);
-            response.send(updatedTodo);
-        });
-    });
+            response.send(deletedTask);
+        })
+    })
 
-    // Server is listening to requests at port 3000
-    // port number can change to anything
-    app.listen(3000, function () {
-        console.log('App listening on port 3000!');
-    });
-};
+    app.listen(3000, () => {
+        console.log('App listening on port 3000!')
+    })
+}
 
-exports.default = server;
+export default server;

@@ -12,86 +12,78 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// importing depencies
 var app = (0, _express2.default)();
 
-// connecting our mongoDB database
-_mongoose2.default.connect('mongodb://localhost/todos');
+_mongoose2.default.connect('mongodb://localhost/tasks');
 
-// mongoDB schema
-var todoModel = _mongoose2.default.model('todo', {
-    description: String,
+var taskModel = _mongoose2.default.model('task', {
+    task: String,
+    date: {
+        type: Date,
+        default: Date.now
+    },
     isCompleted: {
         type: Boolean,
         default: false
     },
-    ID: Number
+    ID: {
+        type: Number,
+        default: 2
+    }
 });
 
-// utility function to print errors
 var logError = function logError(error) {
     if (error) throw error;
 };
 
-// main server function which gets call once the app starts 
-// on our index.js file
 var server = function server() {
-
-    // serving html/js files through the server
     app.use(_express2.default.static('client/public'));
 
-    // routes that gets all todos in a list 
-    // empty is return if nothing is found
     app.get('/get/all', function (request, response) {
-        todoModel.find(function (error, todos) {
+
+        taskModel.find(function (error, tasks) {
             logError(error);
-            response.send(todos);
+            response.send(tasks);
+        });
+        console.log('retrieved');
+    });
+
+    app.get('/save/:task/:ID', function (request, response) {
+        var _request$params = request.params,
+            task = _request$params.task,
+            ID = _request$params.ID;
+
+
+        new taskModel({ task: task, ID: ID }).save(function (error, savedTask) {
+            logError(error);
+            response.send(savedTask);
         });
     });
 
-    // saves a todo
-    // :todo is a paramater passed in the url
-    app.get('/save/:description/:ID', function (request, response) {
-        var todo = request.params.todo;
+    app.get('/update/:date/:isCompleted/:task', function (request, response) {
+        var _request$params2 = request.params,
+            date = _request$params2.date,
+            isCompleted = _request$params2.isCompleted,
+            task = _request$params2.task;
 
-        new todoModel({ todo: todo }).save(function (error, savedTodo) {
+        taskModel.findOneAndUpdate({ date: date }, { isCompleted: isCompleted, task: task }, { new: true }, function (error, updatedTask) {
             logError(error);
-            response.send(savedTodo);
+            response.send(updatedTask);
         });
     });
 
-    // removes a specific todo
-    // :date is a parameter passsed in the url
-    // using date to find a todo since it's a unique timestamp
-    app.get('/remove/:description/:ID', function (request, response) {
+    app.get('/remove/:date', function (request, response) {
         var date = request.params.date;
 
-        todoModel.remove({ date: date }, function (error, deletedTodo) {
+
+        taskModel.remove({ date: date }, function (error, deletedTask) {
             logError(error);
-            response.send(deletedTodo);
+            response.send(deletedTask);
         });
     });
 
-    // finds a specific todo 
-    // updates it a new todo text and completed value  
-    app.get('/update/:description/:isCompleted/:ID', function (request, response) {
-        var _request$params = request.params,
-            date = _request$params.date,
-            completed = _request$params.completed,
-            todo = _request$params.todo;
-
-        todoModel.findOneAndUpdate({ date: date }, { completed: completed, todo: todo }, { new: true }, function (error, updatedTodo) {
-            logError(error);
-            response.send(updatedTodo);
-        });
-    });
-
-    // Server is listening to requests at port 3000
-    // port number can change to anything
     app.listen(3000, function () {
         console.log('App listening on port 3000!');
     });
