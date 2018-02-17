@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
+import request from 'request-promise'
 import TasklogDisplay from '../TasklogDisplay/components/TasklogDisplay.jsx';
 
 class Tasklog extends Component {
     constructor() {
         super();
         this.state = {
-            todos: [
-              {description: 'Initialize Timer Design, Frontend', isCompleted: true, ID: 1},
-              {description: 'Play piano', isCompleted: true, ID: 2},
-              {description: 'Write Timer Reduce() method', isCompleted: true, ID: 3},
-              {description: 'Play piano', isCompleted: true, ID: 4},
-              {description: 'Enable Timer Play/Pause/Reset Methods', isCompleted: true, ID: 5},
-              {description: 'Read DOET', isCompleted: true, ID: 6},
-              {description: 'Provide NextTimer & PrevTimer Features', isCompleted: true, ID: 7},
-              {description: 'Jog', isCompleted: true, ID: 8},
-              {description: 'Create Linked Taskbar', isCompleted: false, ID: 1},
-              {description: 'Eat Lunch', isCompleted: false, ID: 2},
-              {description: 'Create Linked Tasklog', isCompleted: false, ID: 3}
-            ],
+            todos: [],
             newTodoDescription: ''
         };
+        this.toggleComplete = this.toggleComplete.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     toggleComplete(index) {
@@ -43,6 +36,8 @@ class Tasklog extends Component {
       }
     
       handleSubmit(e) {
+        let task = this.state.newTodoDescription
+        let ID = this.props.i+1
         // prevent default page reload
         e.preventDefault();
         // don't allow users to submit blank items
@@ -55,11 +50,16 @@ class Tasklog extends Component {
           isCompleted: false,
           ID: this.props.i+1
         };
+
         // set state to previous + new && clear newTodoDescription
         this.setState({ 
           todos: [...this.state.todos, newTodo], 
           newTodoDescription: '' 
         });
+
+        request('http://localhost:3000/save/'+task+'/'+ID).then(response => {
+          console.log('saved');
+        })
       }
     
       render() {
