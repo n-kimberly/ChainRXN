@@ -34,17 +34,11 @@ class Tasklog extends Component {
       // request('http://localhost:3000/get/all').then(todos => this.setState({ todos: JSON.parse(todos) }));
       request('http://localhost:3000/get/all/').then(response => 
         this.setState({
-          todos: JSON.parse(response)
+          todos: JSON.parse(response),
+          newTodoDescription: ''
         })
       );
       console.log("loaded list");
-      // {
-      //   console.log(response);
-      //   this.setState({
-      //     todos: JSON.parse(response)
-      //   });
-      //   console.log('loaded list');
-      // })
     }
 
     componentDidMount() {
@@ -68,6 +62,8 @@ class Tasklog extends Component {
           todo.description).then(response => {
           console.log('updated');
         })
+
+        this.loadList();
       }
     
       deleteTodo(index) {
@@ -90,21 +86,23 @@ class Tasklog extends Component {
           return; 
         }
         // build newTodo object
-        const newTodo = { 
-          description: this.state.newTodoDescription, 
-          isCompleted: false,
-          ID: this.props.i+1
-        };
+        // const newTodo = { 
+        //   description: this.state.newTodoDescription, 
+        //   isCompleted: false,
+        //   ID: this.props.i+1
+        // };
 
-        // set state to previous + new && clear newTodoDescription
-        this.setState({ 
-          todos: [...this.state.todos, newTodo], 
-          newTodoDescription: '' 
-        });
+        // // set state to previous + new && clear newTodoDescription
+        // this.setState({ 
+        //   todos: [...this.state.todos, newTodo], 
+        //   newTodoDescription: '' 
+        // });
 
         request('http://localhost:3000/save/'+task+'/'+ID).then(response => {
           console.log('saved');
         })
+
+        this.loadList();
       }
     
       render() {
