@@ -7,20 +7,6 @@ class Tasklog extends Component {
         super();
         this.state = {
             todos: [],
-              // {description: 'Initialize Timer Design, Frontend', isCompleted: true, ID: 1},
-              // {description: 'Play piano', isCompleted: true, ID: 2},
-              // {description: 'Write Timer Reduce() method', isCompleted: true, ID: 3},
-              // {description: 'Play piano', isCompleted: true, ID: 4},
-              // {description: 'Enable Timer Play/Pause/Reset Methods', isCompleted: true, ID: 5},
-              // {description: 'Read DOET', isCompleted: true, ID: 6},
-              // {description: 'Provide NextTimer & PrevTimer Features', isCompleted: true, ID: 7},
-              // {description: 'Jog', isCompleted: true, ID: 8},
-              // {description: 'Create Linked Taskbar', isCompleted: false, ID: 1},
-              // {description: 'Eat Lunch', isCompleted: false, ID: 2},
-              // {description: 'Create Linked Tasklog', isCompleted: false, ID: 3}
-              // [
-              // [{"_id":"5a88be365c1bac10989836a6","description":"firsttodo","__v":0,"ID":2,"isCompleted":false,"date":"2018-02-17T23:43:50.562Z"},
-              // {"_id":"5a88bf76bbaecc1210732c86","description":"secondtodo","__v":0,"ID":3,"isCompleted":true,"date":"2018-02-17T23:49:10.092Z"}],
             newTodoDescription: ''
         };
         this.loadList = this.loadList.bind(this);
@@ -52,9 +38,9 @@ class Tasklog extends Component {
         // toggle between false and true
         todo.isCompleted = todo.isCompleted ? false : true;
         // request state update
-        this.setState({ 
-          todos: todos
-        });
+        // this.setState({ 
+        //   todos: todos
+        // });
 
         request('http://localhost:3000/update/'+
           todo.date+'/'+
@@ -67,9 +53,21 @@ class Tasklog extends Component {
       }
     
       deleteTodo(index) {
-        const updatedTodo = this.state.todos.slice(0);
-        updatedTodo.splice(index,1);
-        this.setState({ todos: updatedTodo });
+        const todos = this.state.todos.slice();
+        const todo = todos[index];
+        todos.splice(index,1);
+        // this.setState({ todos: updatedTodo });
+        // console.log(todo);
+        console.log(todo.date);
+
+        // this.setState({ todos: todos });
+
+        request('http://localhost:3000/remove/'+ todo.date).then(response => {
+          console.log('removed');
+        })
+
+        this.loadList();
+
       }
     
       handleChange(e) {
