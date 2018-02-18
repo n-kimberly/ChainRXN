@@ -181,6 +181,8 @@ class App extends Component {
                 url ="chirp.mp3"
                 playStatus = { this.state.playerState }
                 onFinishedPlaying = { this.resetTimer }
+                onLoad={() => console.log('Loaded')}
+                autoLoad = {true}
               />
             </div>
           </div>
