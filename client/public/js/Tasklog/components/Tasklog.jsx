@@ -7,12 +7,48 @@ class Tasklog extends Component {
         super();
         this.state = {
             todos: [],
+              // {description: 'Initialize Timer Design, Frontend', isCompleted: true, ID: 1},
+              // {description: 'Play piano', isCompleted: true, ID: 2},
+              // {description: 'Write Timer Reduce() method', isCompleted: true, ID: 3},
+              // {description: 'Play piano', isCompleted: true, ID: 4},
+              // {description: 'Enable Timer Play/Pause/Reset Methods', isCompleted: true, ID: 5},
+              // {description: 'Read DOET', isCompleted: true, ID: 6},
+              // {description: 'Provide NextTimer & PrevTimer Features', isCompleted: true, ID: 7},
+              // {description: 'Jog', isCompleted: true, ID: 8},
+              // {description: 'Create Linked Taskbar', isCompleted: false, ID: 1},
+              // {description: 'Eat Lunch', isCompleted: false, ID: 2},
+              // {description: 'Create Linked Tasklog', isCompleted: false, ID: 3}
+              // [
+              // [{"_id":"5a88be365c1bac10989836a6","description":"firsttodo","__v":0,"ID":2,"isCompleted":false,"date":"2018-02-17T23:43:50.562Z"},
+              // {"_id":"5a88bf76bbaecc1210732c86","description":"secondtodo","__v":0,"ID":3,"isCompleted":true,"date":"2018-02-17T23:49:10.092Z"}],
             newTodoDescription: ''
         };
+        this.loadList = this.loadList.bind(this);
         this.toggleComplete = this.toggleComplete.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    loadList() {
+      // request('http://localhost:3000/get/all').then(todos => this.setState({ todos: JSON.parse(todos) }));
+      request('http://localhost:3000/get/all/').then(response => 
+        this.setState({
+          todos: JSON.parse(response)
+        })
+      );
+      console.log("loaded list");
+      // {
+      //   console.log(response);
+      //   this.setState({
+      //     todos: JSON.parse(response)
+      //   });
+      //   console.log('loaded list');
+      // })
+    }
+
+    componentDidMount() {
+      this.loadList();
     }
 
     toggleComplete(index) {
@@ -22,7 +58,16 @@ class Tasklog extends Component {
         // toggle between false and true
         todo.isCompleted = todo.isCompleted ? false : true;
         // request state update
-        this.setState({ todos: todos });
+        this.setState({ 
+          todos: todos
+        });
+
+        request('http://localhost:3000/update/'+
+          todo.date+'/'+
+          todo.isCompleted+'/'+
+          todo.description).then(response => {
+          console.log('updated');
+        })
       }
     
       deleteTodo(index) {

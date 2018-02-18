@@ -6,7 +6,7 @@ var app = express();
 mongoose.connect('mongodb://localhost/tasks');
 
 let taskModel = mongoose.model('task', {
-    task: String,
+    description: String,
     date: {
         type: Date,
         default: Date.now
@@ -38,18 +38,18 @@ var server = () => {
         console.log('retrieved');
     })
 
-    app.get('/save/:task/:ID', (request, response) => {
-        let {task, ID} = request.params
+    app.get('/save/:description/:ID', (request, response) => {
+        let {description, ID} = request.params
 
-        new taskModel({task, ID}).save((error, savedTask) => {
+        new taskModel({description, ID}).save((error, savedTask) => {
             logError(error);
             response.send(savedTask);
         })
     })
 
-    app.get('/update/:date/:isCompleted/:task', (request, response) => {
-        let {date, isCompleted, task} = request.params
-        taskModel.findOneAndUpdate({date}, {isCompleted, task}, {new: true}, (error, updatedTask) => {
+    app.get('/update/:date/:isCompleted/:description', (request, response) => {
+        let {date, isCompleted, description} = request.params
+        taskModel.findOneAndUpdate({date}, {isCompleted, description}, {new: true}, (error, updatedTask) => {
             logError(error);
             response.send(updatedTask);
         })
