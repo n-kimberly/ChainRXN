@@ -19,7 +19,7 @@ var app = (0, _express2.default)();
 _mongoose2.default.connect('mongodb://localhost/tasks');
 
 var taskModel = _mongoose2.default.model('task', {
-    task: String,
+    description: String,
     date: {
         type: Date,
         default: Date.now
@@ -50,25 +50,25 @@ var server = function server() {
         console.log('retrieved');
     });
 
-    app.get('/save/:task/:ID', function (request, response) {
+    app.get('/save/:description/:ID', function (request, response) {
         var _request$params = request.params,
-            task = _request$params.task,
+            description = _request$params.description,
             ID = _request$params.ID;
 
 
-        new taskModel({ task: task, ID: ID }).save(function (error, savedTask) {
+        new taskModel({ description: description, ID: ID }).save(function (error, savedTask) {
             logError(error);
             response.send(savedTask);
         });
     });
 
-    app.get('/update/:date/:isCompleted/:task', function (request, response) {
+    app.get('/update/:date/:isCompleted/:description', function (request, response) {
         var _request$params2 = request.params,
             date = _request$params2.date,
             isCompleted = _request$params2.isCompleted,
-            task = _request$params2.task;
+            description = _request$params2.description;
 
-        taskModel.findOneAndUpdate({ date: date }, { isCompleted: isCompleted, task: task }, { new: true }, function (error, updatedTask) {
+        taskModel.findOneAndUpdate({ date: date }, { isCompleted: isCompleted, description: description }, { new: true }, function (error, updatedTask) {
             logError(error);
             response.send(updatedTask);
         });
