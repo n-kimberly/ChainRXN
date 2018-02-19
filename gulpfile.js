@@ -8,12 +8,22 @@ const gulp = require('gulp'),
     buffer = require('vinyl-buffer'),
     watchify = require('watchify'),
     rename = require('gulp-rename'),
-    gutil = require('gulp-util'),
+    gutil = require('gulp-util'),,
     nodemon = require('gulp-nodemon');
 
 const config = {
-    src: './client/public/js/index.js',
-    dest: './client/public/dist/'
+    scripts: {
+        src: './client/public/js/index.js',
+        dest: './client/public/dist/'
+    },
+    styles: {
+        src: './client/public/js/index.css',
+        dest: './client/public/dist/'
+    },
+    sounds: {
+        src: './client/public/js/sounds.mp3',
+        dest: './client/public/dist/'
+    }
 };
 
 let bundle = (bundler) => {
@@ -22,13 +32,13 @@ let bundle = (bundler) => {
         .pipe(source('bundled-app.js'))
         .pipe(buffer())
         .pipe(rename('bundle.js'))
-        .pipe(gulp.dest(config.dest))
+        .pipe(gulp.dest(config.scripts.dest))
         .on('end', () => gutil.log(gutil.colors.green('Finshed compiling js!')));
 }
 
 gulp.task('client-browserify', () => {
 
-    let bundler = browserify(config.src, {
+    let bundler = browserify(config.scripts.src, {
             debug: true
         })
         .plugin(watchify)
