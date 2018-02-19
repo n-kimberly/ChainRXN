@@ -20,7 +20,7 @@ class Tasklog extends Component {
       // request('http://localhost:3000/get/all').then(todos => this.setState({ todos: JSON.parse(todos) }));
       request('http://localhost:3000/get/all/').then(response => 
         this.setState({
-          todos: JSON.parse(response),
+          todos: JSON.parse(response).reverse(),
           newTodoDescription: ''
         })
       );
