@@ -5,6 +5,7 @@ import * as timerStates from './Timer/timerStates';
 import moment from 'moment';
 import Taskbar from './Taskbar/components/Taskbar.jsx';
 import Tasklog from './Tasklog/components/Tasklog.jsx';
+// import '../css/index.css';
 
 class App extends Component {
 
@@ -178,7 +179,7 @@ class App extends Component {
                 pauseTimer = { this.pauseTimer }
               />
               <Sound
-                url ="chirp.mp3"
+                url ="/dist/chirp.mp3"
                 playStatus = { this.state.playerState }
                 onFinishedPlaying = { this.resetTimer }
               />
